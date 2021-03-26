@@ -1,0 +1,43 @@
+.nav-placeholder {
+  grid-row: 1;
+}
+
+.navigation {
+  display: grid;
+  grid-template-rows: 6rem;
+  grid-template-columns: repeat(7, max-content);
+  justify-content: end;
+  align-content: center;
+
+  padding: 2rem 0;
+  position: relative;
+
+  &__list {
+    display: inline-block;
+    list-style: none;
+  }
+
+  &__item {
+    list-style: none;
+    padding-right: 5rem;
+  }
+
+  &__link {
+    &:link,
+    &:visited {
+      color: $color-silver-fox;
+      text-decoration: none;
+      text-transform: uppercase;
+      display: inline-block;
+      transition: all 0.2s;
+    }
+
+    &:hover,
+    &:active {
+      color: $color-yellow;
+      background-color: transparent;
+      box-shadow: 0 1rem 2rem rgba($color-silver-fox, 0.4);
+      transform: scale(1.3);
+    }
+  }
+}

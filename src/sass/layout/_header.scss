@@ -1,0 +1,29 @@
+.header {
+  position: relative;
+  height: 100vh;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-slate, 0),
+      rgba($color-secondary-gray, 0)
+    ),
+    url(../../img/hero_bg.jpg);
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+
+  &__text-box {
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  &__btn-box {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+}

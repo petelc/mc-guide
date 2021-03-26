@@ -1,0 +1,14 @@
+.housing {
+  grid-row: 2;
+  grid-column: center-start / center-end;
+
+  color: $color-silver-fox;
+
+  display: grid;
+  grid-template-rows: 6rem 1fr;
+  grid-template-columns: 1fr;
+
+  &__heading {
+    grid-row: 1;
+  }
+}
