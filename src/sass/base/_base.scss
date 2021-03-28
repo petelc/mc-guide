@@ -13,17 +13,19 @@ html {
 
 body {
   box-sizing: border-box;
-  // padding: 3rem;
-
   background-color: $color-primary-slate;
   color: $color-white;
 }
 
 .container {
+  background-color: $color-white;
+  margin: 3rem;
   display: grid;
-  grid-template-rows: 5rem 1fr 20rem;
-  grid-template-columns: [full-start] minmax(6rem, 1fr) [center-start] repeat(
+  grid-template-rows: 1fr 20rem;
+  grid-template-columns:
+    [full-start] minmax(6rem, 1fr) [center-start] repeat(
       8,
       [col-start] minmax(min-content, 14rem) [col-end]
-    ) [center-end] minmax(6rem, 1fr) [full-end];
+    )
+    [center-end] minmax(6rem, 1fr) [full-end];
 }

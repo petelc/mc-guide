@@ -41,6 +41,14 @@
   }
 
   //   PUT NEW COLORED BUTTONS HERE
+  &--yellow {
+    background-color: $color-yellow;
+    color: $color-secondary-gray;
+
+    &::after {
+      background-color: $color-yellow;
+    }
+  }
 
   &::after {
     content: "";

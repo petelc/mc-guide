@@ -12,7 +12,7 @@ export const HomePage = () => {
         </h1>
       </div>
       <div className="header__btn-box">
-        <a href="https://traxs.dev" className="btn btn--white btn--animated">
+        <a href="https://traxs.dev" className="btn btn--yellow btn--animated">
           Help is out there!
         </a>
       </div>

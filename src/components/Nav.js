@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 export const Nav = () => {
   return (
     <div className="navigation">
-      {/* <div className="navigation__list"> */}
       <div className="navigation__item">
         <Link to="/" className="navigation__link">
           Home
@@ -40,7 +39,6 @@ export const Nav = () => {
           Contact
         </Link>
       </div>
-      {/* </div> */}
     </div>
   );
 };

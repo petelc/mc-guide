@@ -1,5 +1,6 @@
 .nav-placeholder {
   grid-row: 1;
+  grid-column: col-start / full-end;
 }
 
 .navigation {
@@ -10,22 +11,18 @@
   align-content: center;
 
   padding: 2rem 0;
-  position: relative;
-
-  &__list {
-    display: inline-block;
-    list-style: none;
-  }
 
   &__item {
     list-style: none;
     padding-right: 5rem;
+    background-blend-mode: color;
   }
 
   &__link {
     &:link,
     &:visited {
       color: $color-silver-fox;
+      background-color: transparent;
       text-decoration: none;
       text-transform: uppercase;
       display: inline-block;
@@ -38,6 +35,7 @@
       background-color: transparent;
       box-shadow: 0 1rem 2rem rgba($color-silver-fox, 0.4);
       transform: scale(1.3);
+      padding: 0;
     }
   }
 }
