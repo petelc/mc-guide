@@ -1,11 +1,18 @@
 import React from "react";
 
 export const Details = (props) => {
-  const { img_path, title, description, url } = props.housing;
+  const { resources } = props.housing;
+  const { title, description, url, img_path } = resources;
+  //const t = resources.forEach((element) => element.title);
+  console.log(resources);
+  console.log(title);
+
   return (
     <div className="popup__content">
+      {/* {resources.map((item) => (
+        <> */}
       <div className="popup__left">
-        <img src={img_path} alt={props.title} className="popup__img" />
+        <img src={img_path} alt={title} className="popup__img" />
       </div>
       <div className="popup__right">
         <a href="#section-housing" alt="" className="popup__close">
@@ -17,6 +24,8 @@ export const Details = (props) => {
           {url}
         </a>
       </div>
+      {/* </>
+      ))} */}
     </div>
   );
 };

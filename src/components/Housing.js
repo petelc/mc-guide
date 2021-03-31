@@ -9,6 +9,7 @@ export const Housing = () => {
   const [assist, setAssist] = useState("");
 
   function handleClick(hse) {
+    console.log(hse);
     setAssist(hse);
   }
 
@@ -24,15 +25,15 @@ export const Housing = () => {
 
             <div className="house__cards">
               {housing_assistance.map((item) => (
-                <div className="house__card">
+                <div className="house__card" key={item.id}>
                   <img
                     src="../../img/housing.png"
                     className="house__card__img"
                     alt="Find Housing"
                   />
-                  <h5 className="house__card__title">{item.title}</h5>
+                  <h5 className="house__card__title">{item.type}</h5>
                   <div className="house__card__text">
-                    {item["short description"]}
+                    {item.shortdescription}
                   </div>
                   <a
                     className="btn--yellow house__card__btn"
@@ -43,47 +44,6 @@ export const Housing = () => {
                   </a>
                 </div>
               ))}
-              {/* <div className="house__card">
-                <img
-                  src="../../img/housing.png"
-                  className="house__card__img"
-                  alt="Find Housing"
-                />
-                <h5 className="house__card__title">
-                  {housing_assistance[0].title}
-                </h5>
-                <div className="house__card__text">
-                  {housing_data[0]["short description"]}
-                </div>
-                <a
-                  className="btn--yellow house__card__btn"
-                  href="#popup"
-                  onClick={(e) => handleClick(housing_assistance[0])}
-                >
-                  Learn More
-                </a>
-              </div>
-
-              <div className="house__card">
-                <img
-                  src="../../img/rent.jpg"
-                  className="house__card__img"
-                  alt="Rent Help"
-                />
-                <h5 className="house__card__title">
-                  {housing_assistance[1].title}
-                </h5>
-                <div className="house__card__text">
-                  {housing_assistance[1]["short description"]}
-                </div>
-                <a
-                  className="btn--yellow house__card__btn"
-                  href="#popup"
-                  onClick={(e) => handleClick(housing_assistance[1])}
-                >
-                  Learn More
-                </a>
-              </div> */}
             </div>
           </div>
         </section>
