@@ -10,7 +10,7 @@ export const Nav = () => {
         </Link>
       </div>
       <div className="navigation__item">
-        <Link to="/housing" className="navigation__link">
+        <Link to={"/housing"} className="navigation__link">
           Housing
         </Link>
       </div>

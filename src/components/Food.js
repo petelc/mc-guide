@@ -5,13 +5,12 @@ import Service from "./Service";
 
 const apiURL = "http://localhost:4000";
 
-export const Housing = () => {
+export const Food = () => {
   const [assist, setAssist] = useState({ assist: null });
-  console.log(assist);
 
   useEffect(() => {
     // TODO set up the loading state and component
-    const requestURL = apiURL + "/filteredServices?requestType=Housing";
+    const requestURL = apiURL + "/filteredServices?requestType=Food";
     axios.get(requestURL).then((services) => {
       const allServices = services.data;
       setAssist({ assist: allServices });

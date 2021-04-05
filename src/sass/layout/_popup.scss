@@ -15,29 +15,38 @@
 
     width: 75%;
     background-color: $color-silver-fox;
-    display: table;
+    // display: table;
     overflow: hidden;
     opacity: 0;
     transform: translate(-50%, -50%) scale(0);
     transition: all 0.5s 0.2s;
+
+    display: grid;
+    grid-template-columns: 20% 80%;
+    gap: 0.7rem;
   }
 
   // CONTENT LAYOUT
   &__left {
-    width: 33.333333%;
-    display: table-cell;
+    // width: 33.333333%;
+    // display: table-cell;
+    grid-column: 1;
   }
 
   &__right {
-    width: 66.666667%;
-    display: table-cell;
+    // width: 66.666667%;
+    // display: table-cell;
+    grid-column: 2;
     vertical-align: middle;
     padding: 3rem 5rem;
   }
 
   &__img {
     display: block;
+    margin: 1.2rem;
     width: 100%;
+    border: none;
+    border-radius: 100%;
   }
 
   &__text {
