@@ -1,8 +1,11 @@
 import React from "react";
 
-export const Landing = () => {
+import Navigation from "../Navigation";
+
+const Landing = () => {
   return (
     <header className="header">
+      <Navigation />
       <div className="header__text-box">
         <h1 className="heading-primary">
           <span className="heading-primary--main">Muskingum County</span>
