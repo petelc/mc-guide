@@ -1,11 +1,15 @@
 import React from "react";
 
-const Admin = () => {
-  return (
-    <div>
-      <p>Coming Soon</p>
-    </div>
-  );
-};
+import { withAuthorization } from "../Session";
+import * as ROLES from "../../constants/roles";
 
-export default Admin;
+const Admin = () => (
+  <div className="container">
+    <h1 className="heading-1">Admin</h1>
+    <p>Coming Soon</p>
+  </div>
+);
+
+const condition = (authUser) => authUser && !!authUser.roles[ROLES.ADMIN];
+
+export default withAuthorization(condition)(Admin);

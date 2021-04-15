@@ -5,6 +5,7 @@
 
   grid-row: 2;
   grid-column: 2 / 4;
+  margin: 2rem;
 
   &__input {
     font-size: 1.5rem;
@@ -23,19 +24,19 @@
     //   width: 100%;
     // }
 
-    // &:focus {
-    //   outline: none;
-    //   box-shadow: 0 1rem 2rem rgba($color-black, 0.1);
-    //   border-bottom: 3px solid $color-primary-slate;
-    // }
+    &:focus {
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba($color-black, 0.1);
+      border-bottom: 3px solid $color-primary-slate;
+    }
 
-    // &:focus:invalid {
-    //   border-bottom: 3px solid $color-secondary-gray;
-    // }
+    &:focus:invalid {
+      border-bottom: 3px solid $color-secondary-gray;
+    }
 
-    // &::-webkit-input-placeholder {
-    //   color: $color-grey-dark;
-    // }
+    &::-webkit-input-placeholder {
+      color: $color-grey-dark;
+    }
   }
 
   &__label {
@@ -48,11 +49,11 @@
   }
 
   // ? the + sign is a sibling selector: specifically an adjacent sibling selector. The ~ is the general sibling selector.
-  // &__input:placeholder-shown + &__label {
-  //   opacity: 0;
-  //   visibility: hidden;
-  //   transform: translateY(-4rem);
-  // }
+  &__input:placeholder-shown + &__label {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4rem);
+  }
 
   &__radio-group {
     width: 49%;

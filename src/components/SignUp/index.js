@@ -56,7 +56,7 @@ class SignUpFormBase extends Component {
 
   render() {
     const { username, email, passwordOne, passwordTwo, error } = this.state;
-    console.log(this.state);
+
     const isInvalid =
       passwordOne !== passwordTwo ||
       passwordOne === "" ||
@@ -130,7 +130,7 @@ class SignUpFormBase extends Component {
 
 const SignUpLink = () => (
   <p>
-    Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
+    New User?<Link to={ROUTES.SIGN_UP}>Register</Link>
   </p>
 );
 
