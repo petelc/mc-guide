@@ -17,9 +17,10 @@ class Firebase {
     app.initializeApp(config);
 
     this.auth = app.auth();
+    this.db = app.database();
   }
 
-  // * *** AUTH API ***
+  // ? *** AUTH API ***
   doCreateUserWithEmailAndPassword = (email, password) =>
     this.auth.createUserWithEmailAndPassword(email, password);
 
@@ -32,6 +33,58 @@ class Firebase {
 
   doPasswordUpdate = (password) =>
     this.auth.currentUser.updatePassword(password);
+
+  // ? *** Merge Auth and DB User API ***
+  onAuthUserListener = (next, fallback) =>
+    this.auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        this.user(authUser.uid)
+          .once("value")
+          .then((snapshot) => {
+            const dbUser = snapshot.val();
+
+            if (!dbUser.roles) {
+              dbUser.roles = {};
+            }
+
+            authUser = {
+              uid: authUser.uid,
+              email: authUser.email,
+              ...dbUser,
+            };
+
+            next(authUser);
+          });
+      } else {
+        fallback();
+      }
+    });
+
+  // ? *** USER API ***
+  user = (uid) => this.db.ref(`users/${uid}`);
+
+  users = () => this.db.ref("users");
+
+  // * *** MESSAGES API (For Testing) ***
+
+  message = (uid) => this.db.ref(`messages/${uid}`);
+
+  messages = () => this.db.ref("messages");
+
+  // ? *** SERVICES API ***
+
+  service = (sid) => this.db.ref(`services/${sid}`);
+
+  services = () => this.db.ref(`services`);
+
+  // ? *** RESOURCES API ***
+
+  // ! gets the resource based on service id (I think)
+  resource = (sid) => this.db.ref(`resources/${sid}`);
+
+  resources = () => this.db.ref("resources");
+
+  // TODO do i need the service-resource?
 }
 
 export default Firebase;
