@@ -73,7 +73,7 @@ class Firebase {
 
   // ? *** SERVICES API ***
 
-  service = (sid) => this.db.ref(`services/${sid}`);
+  service = (name) => this.db.ref(`services/${name}`);
 
   services = () => this.db.ref(`services`);
 

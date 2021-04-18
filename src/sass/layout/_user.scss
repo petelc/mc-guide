@@ -1,0 +1,24 @@
+.user {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(3, minmax(15rem, 1fr));
+  justify-content: space-between;
+  align-content: center;
+
+  font-size: 1.2rem;
+
+  &__column-1 {
+    grid-column: 1;
+    padding: 0.5rem;
+  }
+
+  &__column-2 {
+    grid-column: 2;
+    padding: 0.5rem;
+  }
+
+  &__column-3 {
+    grid-column: 3;
+    padding: 0.5rem;
+  }
+}

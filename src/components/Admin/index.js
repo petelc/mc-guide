@@ -3,6 +3,9 @@ import React, { Component } from "react";
 
 import { withFirebase } from "../Firebase";
 import { AuthUserContext } from "../Session";
+import AddService from "./addService";
+import AddResource from "./addResource";
+import Header from "../Header";
 // import * as ROLES from "../../constants/roles";
 
 class AdminPage extends Component {
@@ -46,25 +49,51 @@ class AdminPage extends Component {
     return (
       <AuthUserContext.Consumer>
         {(authUser) => (
-          <div className="container">
-            <h1 className="heading-1">Admin</h1>
-            <div className="house__cards">
-              {loading && <div>Loading....</div>}
-              {users ? (
-                <UserList users={users} />
-              ) : (
-                <div>There are no users....</div>
-              )}
+          <>
+            <Header />
+            <div className="container">
+              <div className="block">
+                <div className="block__heading">
+                  <h1 className="heading-1">Admin</h1>
+                </div>
+                <div className="block__side-bar">
+                  <p>some type of navigation goes here</p>
+                </div>
+                <div className="block__content">
+                  <div className="block__content__row-1">
+                    <h3 className="heading-3">Users:</h3>
+                    {loading && <div>Loading....</div>}
+                    {users ? (
+                      <UserList users={users} />
+                    ) : (
+                      <div>There are no users....</div>
+                    )}
+                  </div>
+                  <div className="block__content__row-2">
+                    <h3 className="heading-3">Add New Service:</h3>
+                    <AddService />
+                  </div>
+                  <div className="block__content__row-3">
+                    <h3 className="heading-3">Add New Resource:</h3>
+                    <AddResource />
+                  </div>
+                </div>
+              </div>
+              <div className="block__footing">
+                <p>any type of footing content</p>
+              </div>
             </div>
-          </div>
+          </>
         )}
       </AuthUserContext.Consumer>
     );
   }
 }
 
+// TODO 1) Move User Listing to its own component.
+// TODO 2) Handle Roles
 const UserList = ({ users }) => (
-  <div className="house__card">
+  <div className="user">
     {users.map((user) => (
       <UserItem key={user.uid} user={user} />
     ))}
@@ -73,8 +102,9 @@ const UserList = ({ users }) => (
 
 const UserItem = ({ user }) => (
   <>
-    <h4 className="house__card__title">{user.uid}</h4>
-    <div className="house__card__text">{user.username}</div>
+    <div className="user__column-1">{user.username}</div>
+    <div className="user__column-2">{user.email}</div>
+    <div className="user__column-3">{user.roles[0]}</div>
   </>
 );
 

@@ -9,8 +9,11 @@
 @import "components/form";
 @import "components/head";
 
+@import "layout/blocks";
 @import "layout/header";
 @import "layout/navigation";
 @import "layout/popup";
+@import "layout/services";
+@import "layout/user";
 
 @import "pages/housing";

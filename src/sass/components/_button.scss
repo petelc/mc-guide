@@ -50,6 +50,15 @@
     }
   }
 
+  &--submit {
+    background-color: $color-secondary-gray;
+    color: $color-yellow;
+
+    &::after {
+      background-color: $color-secondary-gray;
+    }
+  }
+
   &::after {
     content: "";
     display: inline-block;
