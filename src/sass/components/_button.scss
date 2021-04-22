@@ -77,3 +77,18 @@
     animation-fill-mode: backwards;
   }
 }
+
+.icon__btn {
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  color: $color-white;
+  // padding: 0.3rem;
+  font-size: 1.6rem;
+  cursor: pointer;
+  z-index: 10;
+
+  &--img {
+    width: 70%;
+  }
+}

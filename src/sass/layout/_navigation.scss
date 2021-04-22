@@ -18,6 +18,11 @@
     background-blend-mode: color;
   }
 
+  &__btn {
+    border: none;
+    border-radius: 50%;
+  }
+
   &__link {
     &:link,
     &:visited {

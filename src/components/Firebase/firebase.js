@@ -1,6 +1,7 @@
 import app from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
+import "firebase/storage";
 
 // TODO Create second project on Firebase for production
 const config = {
@@ -18,6 +19,7 @@ class Firebase {
 
     this.auth = app.auth();
     this.db = app.database();
+    this.store = app.storage();
   }
 
   // ? *** AUTH API ***
@@ -60,6 +62,9 @@ class Firebase {
       }
     });
 
+  // ? *** STORAGE REFERENCE ***
+  storageRef = this.store.storage().ref();
+
   // ? *** USER API ***
   user = (uid) => this.db.ref(`users/${uid}`);
 
@@ -80,7 +85,7 @@ class Firebase {
   // ? *** RESOURCES API ***
 
   // ! gets the resource based on service id (I think)
-  resource = (sid) => this.db.ref(`resources/${sid}`);
+  resource = (name) => this.db.ref(`resources/${name}`);
 
   resources = () => this.db.ref("resources");
 

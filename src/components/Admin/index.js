@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 // import { compose } from "recompose";
 
 import { withFirebase } from "../Firebase";
@@ -6,6 +7,7 @@ import { AuthUserContext } from "../Session";
 import AddService from "./addService";
 import AddResource from "./addResource";
 import Header from "../Header";
+import { SignUpLink } from "../SignUp";
 // import * as ROLES from "../../constants/roles";
 
 class AdminPage extends Component {
@@ -57,7 +59,7 @@ class AdminPage extends Component {
                   <h1 className="heading-1">Admin</h1>
                 </div>
                 <div className="block__side-bar">
-                  <p>some type of navigation goes here</p>
+                  <SignUpLink />
                 </div>
                 <div className="block__content">
                   <div className="block__content__row-1">

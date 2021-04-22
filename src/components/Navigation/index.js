@@ -28,6 +28,11 @@ const NavigationAuth = ({ authUser }) => (
       </Link>
     </div>
     <div className="navigation__item">
+      <Link to={ROUTES.HOME} className="navigation__link">
+        Services
+      </Link>
+    </div>
+    <div className="navigation__item">
       <Link to={ROUTES.ACCOUNT} className="navigation__link">
         Account
       </Link>
@@ -71,7 +76,7 @@ const NavigationNonAuth = () => (
     </div>
     <div className="navigation__item">
       <Link to={ROUTES.SIGN_IN} className="navigation__link">
-        Sign In
+        <img src="/img/user.svg" alt="Sign In" />
       </Link>
     </div>
   </>

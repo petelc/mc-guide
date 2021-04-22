@@ -35,6 +35,10 @@ class AddService extends Component {
     event.preventDefault();
   };
 
+  uploadImages(contentType, event) {
+    // TODO handle file upload
+  }
+
   render() {
     const { img_path, name, shortDescription, description } = this.state;
 

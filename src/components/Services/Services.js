@@ -9,6 +9,7 @@ class Services extends Component {
 
     this.state = {
       loading: false,
+      open: false,
       services: [],
     };
   }
@@ -38,15 +39,18 @@ class Services extends Component {
 
   render() {
     const { services, loading } = this.state;
+
     return (
-      <div className="house__cards">
-        {loading && <div>Loading....</div>}
-        {services ? (
-          <ServicesList services={services} />
-        ) : (
-          <div>There are no available services .....</div>
-        )}
-      </div>
+      <>
+        <div className="house__cards">
+          {loading && <div>Loading....</div>}
+          {services ? (
+            <ServicesList key={services.sid} services={services} />
+          ) : (
+            <div>There are no available services .....</div>
+          )}
+        </div>
+      </>
     );
   }
 }

@@ -12,7 +12,7 @@ const HomePage = () => {
         <section className="housing" id="section-housing">
           <div className="house">
             <div className="house__heading">
-              <h2 className="heading-2">Available Resources</h2>
+              <h2 className="heading-2">Available Services</h2>
             </div>
             <Services />
           </div>

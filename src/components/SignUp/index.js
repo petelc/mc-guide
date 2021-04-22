@@ -166,7 +166,9 @@ class SignUpFormBase extends Component {
 
 const SignUpLink = () => (
   <p>
-    New User?<Link to={ROUTES.SIGN_UP}>Register</Link>
+    <Link to={ROUTES.SIGN_UP} className="shelf__link">
+      Register a User
+    </Link>
   </p>
 );
 

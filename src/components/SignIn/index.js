@@ -3,7 +3,6 @@ import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
 
 import Header from "../Header";
-import { SignUpLink } from "../SignUp";
 import { withFirebase } from "../Firebase";
 import * as ROUTES from "../../constants/routes";
 
@@ -12,9 +11,17 @@ const SignInPage = () => {
     <>
       <Header />
       <div className="container">
-        <h1 className="heading-1">Sign Up</h1>
-        <SignInForm />
-        <SignUpLink />
+        <div className="block">
+          <div className="block__heading">
+            <h1 className="heading-1">Sign In</h1>
+          </div>
+          <div className="block__side-bar"></div>
+          <div className="block__content">
+            <div className="block__content__row-1">
+              <SignInForm />
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
@@ -59,7 +66,7 @@ class SignInFormBase extends Component {
     return (
       <form onSubmit={this.onSubmit} className="form">
         <div className="form__group">
-          <label htmlFor="email" className="form_label">
+          <label htmlFor="email" className="form__label form__group__label">
             Email Address
           </label>
           <input
@@ -67,7 +74,7 @@ class SignInFormBase extends Component {
             value={email}
             onChange={this.onChange}
             type="text"
-            className="form__input"
+            className="form__input form__group--md"
             placeholder="Email Address"
           />
         </div>
@@ -80,14 +87,18 @@ class SignInFormBase extends Component {
             value={password}
             onChange={this.onChange}
             type="password"
-            className="form__input"
+            className="form__input form__group--sm"
             autoComplete="new password"
             placeholder="Password"
           />
         </div>
 
         <div className="form__group">
-          <button disabled={isInvalid} type="submit" className="btn--yellow">
+          <button
+            disabled={isInvalid}
+            type="submit"
+            className="form__group--sm btn btn--submit"
+          >
             Sign In
           </button>
         </div>
