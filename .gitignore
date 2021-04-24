@@ -32,3 +32,4 @@ yarn.lock
 /node_modules
 /notes
 /.yarn
+/src/components/archive

@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 
-// import { compose } from "recompose";
-
 import { withFirebase } from "../Firebase";
 import { AuthUserContext } from "../Session";
-import AddService from "./addService";
 import AddResource from "./addResource";
 import Header from "../Header";
 import { SignUpLink } from "../SignUp";
+import { FileUpload } from "../Upload";
 // import * as ROLES from "../../constants/roles";
 
 class AdminPage extends Component {
@@ -73,7 +71,7 @@ class AdminPage extends Component {
                   </div>
                   <div className="block__content__row-2">
                     <h3 className="heading-3">Add New Service:</h3>
-                    <AddService />
+                    <FileUpload />
                   </div>
                   <div className="block__content__row-3">
                     <h3 className="heading-3">Add New Resource:</h3>
@@ -110,9 +108,4 @@ const UserItem = ({ user }) => (
   </>
 );
 
-// const condition = (authUser) => authUser && !!authUser.roles[ROLES.ADMIN];
-
-// export default compose(withAuthorization(condition), withFirebase)(AdminPage);
-
-// export default withAuthorization(condition)(Admin);
 export default withFirebase(AdminPage);
