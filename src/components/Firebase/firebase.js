@@ -19,7 +19,7 @@ class Firebase {
 
     this.auth = app.auth();
     this.db = app.database();
-    this.store = app.storage();
+    this.storage = app.storage();
   }
 
   // ? *** AUTH API ***
@@ -62,8 +62,8 @@ class Firebase {
       }
     });
 
-  // ? *** STORAGE REFERENCE ***
-  storageRef = this.store.storage().ref();
+  // // ? *** STORAGE REFERENCE ***
+  projectStorage = () => this.storage.ref();
 
   // ? *** USER API ***
   user = (uid) => this.db.ref(`users/${uid}`);
