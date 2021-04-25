@@ -6,7 +6,7 @@
 .navigation {
   display: grid;
   grid-template-rows: 6rem;
-  grid-template-columns: repeat(7, max-content);
+  grid-template-columns: repeat(7, minmax(min-content, max-content));
   justify-content: end;
   align-content: center;
 
@@ -16,6 +16,10 @@
     list-style: none;
     padding-right: 5rem;
     background-blend-mode: color;
+
+    @include respond(phone) {
+      padding-right: 3rem;
+    }
   }
 
   &__btn {
