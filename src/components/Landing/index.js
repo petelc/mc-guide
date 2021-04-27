@@ -1,6 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import Navigation from "../Navigation";
+import * as ROUTES from "../../constants/routes";
 
 const Landing = () => {
   return (
@@ -13,9 +15,9 @@ const Landing = () => {
         </h1>
       </div>
       <div className="header__btn-box">
-        <a href="https://traxs.dev" className="btn btn--yellow btn--animated">
+        <Link to={ROUTES.HOME} className="btn btn--yellow btn--animated">
           Help is out there!
-        </a>
+        </Link>
       </div>
     </header>
   );
