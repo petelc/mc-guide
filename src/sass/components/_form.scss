@@ -15,6 +15,10 @@
     align-content: top;
     row-gap: 1.2rem;
 
+    @include respond(tab-land) {
+      grid-template-columns: repeat(4, 10rem);
+    }
+
     &__label {
       grid-row: 1;
       grid-column: 1 / -1;
@@ -28,11 +32,19 @@
     &--md {
       grid-row: 2;
       grid-column: 1 / 6;
+
+      @include respond(tab-land) {
+        grid-column: 1 / 4;
+      }
     }
 
     &--lg {
       grid-row: 3;
       grid-column: 1 / 8;
+
+      @include respond(tab-land) {
+        grid-column: 1 / 4;
+      }
     }
   }
 
