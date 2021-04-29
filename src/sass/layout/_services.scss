@@ -6,6 +6,14 @@
   justify-content: space-between;
   padding: 0.5rem;
 
+  @include respond(tab-land) {
+    grid-template-columns: repeat(8, 10rem);
+  }
+
+  @include respond(phone) {
+    grid-template-columns: repeat(4, 10rem);
+  }
+
   &__heading {
     grid-row: 1;
     grid-column: 1 / -1;
