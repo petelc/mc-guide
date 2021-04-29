@@ -54,8 +54,16 @@ const ResourcesItem = ({ resource }) => {
         <div className="modal">
           <div className="modal__header">{resource.resourceName}</div>
           <div className="modal__resource--1">{resource.url}</div>
-          <div className="modal__resource--2">{resource.availableDownload}</div>
-          <div className="modal__resource--3">{resource.application}</div>
+          <div className="modal__resource--2">
+            <a href={resource.availableDownload} alt="download" target="blank">
+              {resource.avLabel}
+            </a>
+          </div>
+          <div className="modal__resource--3">
+            <a href={resource.application} alt="application" target="blank">
+              {resource.appLabel}
+            </a>
+          </div>
           <div className="modal__content">{details}</div>
         </div>
       </Modal>
