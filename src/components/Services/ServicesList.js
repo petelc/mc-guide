@@ -2,11 +2,11 @@ import React from "react";
 
 import ServiceItem from "./ServicesItem";
 
-const ServicesList = ({ services, open, onModalChange }) => (
+const ServicesList = ({ services }) => (
   <>
     {services.map((service) => (
       <div className="house__card">
-        <ServiceItem service={service} />
+        <ServiceItem key={service.sid} service={service} />
       </div>
     ))}
   </>

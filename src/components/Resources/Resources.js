@@ -18,7 +18,7 @@ class ResourcesPage extends Component {
   componentDidMount() {
     this.setState({ loading: true });
     // const name = this.props.name;
-    const name = this.props.location.search.substring(3);
+    const name = this.props.location.search.substring(3).toString();
     console.log("in resource component mount");
     console.log(name);
 
@@ -71,7 +71,7 @@ class ResourcesPage extends Component {
               <div className="resources">
                 {loading && <div>Loading...</div>}
                 {resources ? (
-                  <ResourcesList key={resources.rid} resources={resources} />
+                  <ResourcesList resources={resources} />
                 ) : (
                   <div>There are no resources...</div>
                 )}

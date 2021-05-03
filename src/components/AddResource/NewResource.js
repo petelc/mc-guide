@@ -123,6 +123,7 @@ const NewResource = (props) => {
       application: application,
       appLabel: appLabel,
     });
+
     setResourceName("");
     setName("");
     setShortDescription("");

@@ -8,3 +8,4 @@ export const ADMIN = "/admin";
 export const CONTACT = "/contact";
 export const ABOUT = "/about";
 export const PASSWORD_FORGET = "/pw-forget";
+export const ADMIN_RESOURCES = "/admin-resources";

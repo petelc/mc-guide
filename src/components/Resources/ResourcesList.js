@@ -6,7 +6,7 @@ const ResourcesList = ({ resources }) => (
   <>
     {resources.map((resource) => (
       <div className="resource">
-        <ResourcesItem key={resource.rid} resource={resource} />
+        <ResourcesItem key={resource.resourceName} resource={resource} />
       </div>
     ))}
   </>
