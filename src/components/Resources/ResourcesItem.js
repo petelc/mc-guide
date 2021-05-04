@@ -6,6 +6,7 @@ import parse, { attributesToProps } from "html-react-parser";
 const ResourcesItem = ({ resource }) => {
   const [open, setOpen] = React.useState(false);
   const html = resource.description;
+  let details = "";
 
   const options = {
     replace: (domNode) => {
@@ -16,7 +17,9 @@ const ResourcesItem = ({ resource }) => {
     },
   };
 
-  const details = parse(html, options);
+  if (html) {
+    details = parse(html, options);
+  }
 
   return (
     <>

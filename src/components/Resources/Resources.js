@@ -18,9 +18,7 @@ class ResourcesPage extends Component {
   componentDidMount() {
     this.setState({ loading: true });
     // const name = this.props.name;
-    const name = this.props.location.search.substring(3);
-    console.log("in resource component mount");
-    console.log(name);
+    const name = this.props.location.search.substring(3).toString();
 
     if (name) {
       this.props.firebase
@@ -29,7 +27,6 @@ class ResourcesPage extends Component {
         .equalTo(name)
         .on("value", (snapshot) => {
           const data = snapshot.val();
-          console.log(data);
 
           if (data) {
             const dataList = Object.keys(data).map((key) => ({
@@ -71,7 +68,7 @@ class ResourcesPage extends Component {
               <div className="resources">
                 {loading && <div>Loading...</div>}
                 {resources ? (
-                  <ResourcesList key={resources.rid} resources={resources} />
+                  <ResourcesList resources={resources} />
                 ) : (
                   <div>There are no resources...</div>
                 )}

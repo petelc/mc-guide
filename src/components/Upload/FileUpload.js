@@ -22,24 +22,21 @@ const FileUpload = (props) => {
 
   const handleChange = (e) => {
     let selected = e.target.files[0];
-    console.log(selected);
 
     if (selected && types.includes(selected.type)) {
-      console.log(selected.name);
       setFile(selected);
       // ? References
       const myStorage = props.firebase.storage;
 
       const storageRef = myStorage.ref();
       const fileRef = storageRef.child("images/" + selected.name);
-      console.log(fileRef);
+
       fileRef.put(selected).then(
         (snap) => {
           let percentage = (snap.bytesTransferred / snap.totalBytes) * 100;
           setProgress(percentage);
-          console.log(progress);
+
           snap.ref.getDownloadURL().then(function (url) {
-            console.log("File available at", url);
             setImgPath(url);
           });
         },

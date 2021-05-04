@@ -45,7 +45,7 @@ class Services extends Component {
         <div className="house__cards">
           {loading && <div>Loading....</div>}
           {services ? (
-            <ServicesList key={services.sid} services={services} />
+            <ServicesList services={services} />
           ) : (
             <div>There are no available services .....</div>
           )}

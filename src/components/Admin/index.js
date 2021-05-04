@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { withFirebase } from "../Firebase";
 import { AuthUserContext } from "../Session";
 // import AddResource from "./addResource";
@@ -6,6 +7,17 @@ import Header from "../Header";
 import { SignUpLink } from "../SignUp";
 import { FileUpload } from "../Upload";
 import { NewResource } from "../AddResource";
+
+import * as ROUTES from "../../constants/routes";
+/**
+ *
+ * @param {*} props
+ * @returns
+ *
+ * TODO Build navigation in the sidebar
+ * TODO Create a list of resources (all)
+ * TODO ADD Edit - Delete functionality <icons by each item>
+ */
 
 const AdminPage = (props) => {
   return (
@@ -20,17 +32,10 @@ const AdminPage = (props) => {
               </div>
               <div className="block__side-bar">
                 <SignUpLink />
+                <Link to={ROUTES.ADMIN_RESOURCES}>Edit Resources</Link>
               </div>
               <div className="block__content">
-                <div className="block__content__row-1">
-                  {/* <h3 className="heading-3">Users:</h3>
-                  {loading && <div>Loading....</div>}
-                  {users ? (
-                    <UserList users={users} />
-                  ) : (
-                    <div>There are no users....</div>
-                  )} */}
-                </div>
+                <div className="block__content__row-1"></div>
                 <div className="block__content__row-2">
                   <h3 className="heading-3">Add New Service:</h3>
                   <FileUpload />
