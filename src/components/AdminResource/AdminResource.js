@@ -9,18 +9,20 @@ import "suneditor/dist/css/suneditor.min.css";
 import { withFirebase } from "../Firebase";
 import Header from "../Header";
 
+// ? Maybe I should create a Resource Service and put in the database operations
+
 const AdminResource = (props) => {
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
   const [progress, setProgress] = useState(0);
   const [progress2, setProgress2] = useState(0);
-  const [key, setKey] = useState(null);
-  const [resourceName, setResourceName] = useState(null);
-  const [name, setName] = useState(null);
-  const [shortDescription, setShortDescription] = useState(null);
-  const [description, setDescription] = useState(null);
-  const [url, setUrl] = useState(null);
-  const [phone, setPhone] = useState(null);
+  // const [key, setKey] = useState(null);
+  // const [resourceName, setResourceName] = useState(null);
+  // const [name, setName] = useState(null);
+  // const [shortDescription, setShortDescription] = useState(null);
+  // const [description, setDescription] = useState(null);
+  // const [url, setUrl] = useState(null);
+  // const [phone, setPhone] = useState(null);
   // state objs for file uploads
   const [availableDownload, setAvailableDownload] = useState(null);
   const [avLabel, setAvLabel] = useState(null);
@@ -28,7 +30,8 @@ const AdminResource = (props) => {
   const [appLabel, setAppLabel] = useState(null);
   const [resources, setResources] = useState(null);
   // const [currentIndex, setCurrentIndex] = useState(-1);
-  // const [currentResource, setCurrentResource] = useState(null);
+  const [currentResource, setCurrentResource] = useState(null);
+  const [message, setMessage] = useState("");
   const [open, setOpen] = React.useState(false);
 
   const types = [
@@ -73,101 +76,74 @@ const AdminResource = (props) => {
     resourceRef.remove();
   };
 
-  const OnEditResource = (e) => {
+  const OnEditResource = (event) => {
+    event.preventDefault();
+
+    const data = {
+      key: currentResource.key,
+      name: currentResource.name,
+      resourceName: currentResource.resourceName,
+      url: currentResource.url,
+      phone: currentResource.phone,
+      shortDescription: currentResource.shortDescription,
+      description: currentResource.description,
+      availableDownload: availableDownload,
+      avLabel: avLabel,
+      application: application,
+      appLabel: appLabel,
+    };
+
     let resourcesRef = props.firebase.resources();
-    let resourceRef = resourcesRef.child(key);
-    alert(e.target.value);
-    alert(resourcesRef);
-    alert(key);
+    let resourceRef = resourcesRef.child(data.key);
+
     resourceRef
-      .child(key)
-      .update({
-        name: name,
-        resourceName: resourceName,
-        shortDescription: shortDescription,
-        description: description,
-        application: application,
-        appLabel: avLabel,
-        availableDownload: availableDownload,
-        avLabel: avLabel,
-        url: url,
-        phone: phone,
+      .update(data)
+      .then(() => {
+        setMessage("Resource updated successfully");
       })
       .catch((err) => {
         console.log(err);
+        setError(`ERROR: ${err}`);
       });
-    e.preventDefault();
 
-    //     var adaNameRef = firebase.database().ref('users/ada/name');
-    // // Modify the 'first' and 'last' properties, but leave other data at
-    // // adaNameRef unchanged.
-    // adaNameRef.update({ first: 'Ada', last: 'Lovelace' });
+    setCurrentResource(null);
 
-    // setResourceName("");
-    // setName("");
-    // setShortDescription("");
-    // setDescription("");
-    // setUrl("");
-    // setPhone("");
-    // setAvailableDownload("");
-    // setAvLabel("");
-    // setApplication("");
-    // setAppLabel("");
-
-    // setOpen(false);
+    setOpen(false);
   };
 
   const OnOpenEditResource = (key) => {
     setOpen(true);
+    setMessage("");
     let resourcesRef = props.firebase.resources();
     resourcesRef.child(key).on("value", (snapshot) => {
       let data = snapshot.val();
       console.log(data.resourceName);
-      // setKey(data.key);
-      setName(data.name);
+      const datalist = {
+        key: key,
+        name: data.name,
+        resourceName: data.resourceName,
+        shortDescription: data.shortDescription,
+        description: data.description,
+        url: data.url,
+        phone: data.phone,
+        availableDownload: data.availableDownload,
+        application: data.application,
+      };
 
-      setResourceName(data.resourceName);
-      setShortDescription(data.shortDescription);
-      setDescription(data.description);
-      setApplication(data.application);
-      setAppLabel(data.appLabel);
-      setAvailableDownload(data.availableDownload);
-      setAvLabel(data.avLabel);
-      setUrl(data.url);
-      setPhone(data.phone);
+      setCurrentResource(datalist);
     });
   };
 
   const handleEditorChange = (content) => {
-    setDescription(content);
+    // setDescription(content);
+    setCurrentResource({ ...currentResource, description: content });
   };
 
   const onChangeContent = (e) => {
     console.log(e);
-    switch (e.target.name) {
-      case "name":
-        setName(e.target.value);
-        console.log(e.target.value);
-        break;
-      case "shortDescription":
-        setShortDescription(e.target.value);
-        console.log(e.target.value);
-        break;
-      case "url":
-        setUrl(e.target.value);
-        console.log(e.target.value);
-        break;
-      case "phone":
-        setPhone(e.target.value);
-        console.log(e.target.value);
-        break;
-      case "resourceName":
-        setResourceName(e.target.value);
-        console.log(e.target.value);
-        break;
-      default:
-        break;
-    }
+    const { name, value } = e.target;
+    console.log(name + " " + value);
+    setCurrentResource({ ...currentResource, [name]: value });
   };
 
   const handleChange = (e) => {
@@ -282,9 +258,11 @@ const AdminResource = (props) => {
       </div>
       <Modal open={open} onClose={() => setOpen(false)} center>
         <div className="admin__modal">
-          {resources ? (
+          {currentResource ? (
             <>
-              <div className="admin__modal__header">Edit {resourceName}</div>
+              <div className="admin__modal__header">
+                Edit {currentResource.resourceName}
+              </div>
               <div className="admin__modal__content">
                 {error && <div className="error">{error}</div>}
                 <form
@@ -300,7 +278,7 @@ const AdminResource = (props) => {
                     </label>
                     <input
                       name="name"
-                      value={name}
+                      value={currentResource.name}
                       onChange={onChangeContent}
                       type="text"
                       className="form__input form__group--sm"
@@ -316,7 +294,7 @@ const AdminResource = (props) => {
                     </label>
                     <input
                       name="resourceName"
-                      value={resourceName}
+                      value={currentResource.resourceName}
                       onChange={onChangeContent}
                       type="text"
                       className="form__input form__group--sm"
@@ -332,7 +310,7 @@ const AdminResource = (props) => {
                     </label>
                     <input
                       name="url"
-                      value={url}
+                      value={currentResource.url}
                       onChange={onChangeContent}
                       type="text"
                       className="form__input form__group--sm"
@@ -348,7 +326,7 @@ const AdminResource = (props) => {
                     </label>
                     <input
                       name="phone"
-                      value={phone}
+                      value={currentResource.phone}
                       onChange={onChangeContent}
                       type="text"
                       className="form__input form__group--sm"
@@ -388,9 +366,7 @@ const AdminResource = (props) => {
                     >
                       Available Download
                     </label>
-                    <p className="form__label form__group__label">
-                      {availableDownload}
-                    </p>
+                    <p className="form__label form__group__label">{avLabel}</p>
                   </div>
 
                   <div className="form__group">
@@ -435,7 +411,7 @@ const AdminResource = (props) => {
                     </label>
                     <input
                       name="shortDescription"
-                      value={shortDescription}
+                      value={currentResource.shortDescription}
                       onChange={onChangeContent}
                       type="text"
                       className="form__input form__group--md"
@@ -454,12 +430,15 @@ const AdminResource = (props) => {
                       <SunEditor
                         name="description"
                         // value={description}
-                        content={description}
+                        content={currentResource.description}
                         width="100%"
                         height="500px"
                         onChange={handleEditorChange}
                       />
                     </div>
+                  </div>
+                  <div className="form__group">
+                    <p className="form__label form__group__label">{message}</p>
                   </div>
                   <div className="form__group">
                     <button

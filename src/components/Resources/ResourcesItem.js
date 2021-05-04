@@ -19,7 +19,6 @@ const ResourcesItem = ({ resource }) => {
 
   if (html) {
     details = parse(html, options);
-    console.log(details);
   }
 
   return (

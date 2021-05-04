@@ -19,8 +19,6 @@ class ResourcesPage extends Component {
     this.setState({ loading: true });
     // const name = this.props.name;
     const name = this.props.location.search.substring(3).toString();
-    console.log("in resource component mount");
-    console.log(name);
 
     if (name) {
       this.props.firebase
@@ -29,7 +27,6 @@ class ResourcesPage extends Component {
         .equalTo(name)
         .on("value", (snapshot) => {
           const data = snapshot.val();
-          console.log(data);
 
           if (data) {
             const dataList = Object.keys(data).map((key) => ({

@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-// import Navigation from "../Navigation";
 import Landing from "../Landing";
 import SignUpPage from "../SignUp";
 import SignInPage from "../SignIn";
@@ -22,8 +21,6 @@ import "../../sass/main.scss";
 const App = () => (
   <Router>
     <div>
-      {/* <Navigation /> */}
-
       <Route exact path={ROUTES.LANDING} component={Landing} />
       <Route path={ROUTES.HOME} component={HomePage} />
       <Route path={ROUTES.RESOURCES} component={ResourcesPage} />

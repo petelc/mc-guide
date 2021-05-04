@@ -35,7 +35,7 @@ const FileUpload = (props) => {
         (snap) => {
           let percentage = (snap.bytesTransferred / snap.totalBytes) * 100;
           setProgress(percentage);
-          console.log(progress);
+
           snap.ref.getDownloadURL().then(function (url) {
             setImgPath(url);
           });

@@ -35,15 +35,7 @@ const AdminPage = (props) => {
                 <Link to={ROUTES.ADMIN_RESOURCES}>Edit Resources</Link>
               </div>
               <div className="block__content">
-                <div className="block__content__row-1">
-                  {/* <h3 className="heading-3">Users:</h3>
-                  {loading && <div>Loading....</div>}
-                  {users ? (
-                    <UserList users={users} />
-                  ) : (
-                    <div>There are no users....</div>
-                  )} */}
-                </div>
+                <div className="block__content__row-1"></div>
                 <div className="block__content__row-2">
                   <h3 className="heading-3">Add New Service:</h3>
                   <FileUpload />

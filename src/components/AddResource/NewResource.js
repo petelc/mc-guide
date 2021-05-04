@@ -57,7 +57,6 @@ const NewResource = (props) => {
           }
 
           snap.ref.getDownloadURL().then(function (url) {
-            console.log("File available at", url);
             if (fileType === "downloads") {
               setAvailableDownload(url);
               setAvLabel(selected.name);
