@@ -52,7 +52,7 @@ class SignUpFormBase extends Component {
           roles,
         });
       })
-      .then((authUser) => {
+      .then(() => {
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
       })
@@ -68,7 +68,7 @@ class SignUpFormBase extends Component {
   };
 
   onChangedCheckbox = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({ [event.target.name]: event.target.checked });
   };
 
   render() {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { compose } from "recompose";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import { CircularProgressbar } from "react-circular-progressbar";
@@ -7,6 +8,8 @@ import SunEditor from "suneditor-react";
 import "suneditor/dist/css/suneditor.min.css";
 
 import { withFirebase } from "../Firebase";
+import { withAuthorization } from "../Session";
+import * as ROLES from "../../constants/roles";
 import Header from "../Header";
 
 // ? Maybe I should create a Resource Service and put in the database operations
@@ -16,20 +19,11 @@ const AdminResource = (props) => {
   const [error, setError] = useState(null);
   const [progress, setProgress] = useState(0);
   const [progress2, setProgress2] = useState(0);
-  // const [key, setKey] = useState(null);
-  // const [resourceName, setResourceName] = useState(null);
-  // const [name, setName] = useState(null);
-  // const [shortDescription, setShortDescription] = useState(null);
-  // const [description, setDescription] = useState(null);
-  // const [url, setUrl] = useState(null);
-  // const [phone, setPhone] = useState(null);
-  // state objs for file uploads
   const [availableDownload, setAvailableDownload] = useState(null);
   const [avLabel, setAvLabel] = useState(null);
   const [application, setApplication] = useState(null);
   const [appLabel, setAppLabel] = useState(null);
   const [resources, setResources] = useState(null);
-  // const [currentIndex, setCurrentIndex] = useState(-1);
   const [currentResource, setCurrentResource] = useState(null);
   const [message, setMessage] = useState("");
   const [open, setOpen] = React.useState(false);
@@ -135,7 +129,6 @@ const AdminResource = (props) => {
   };
 
   const handleEditorChange = (content) => {
-    // setDescription(content);
     setCurrentResource({ ...currentResource, description: content });
   };
 
@@ -460,4 +453,9 @@ const AdminResource = (props) => {
   );
 };
 
-export default withFirebase(AdminResource);
+const condition = (authUser) => authUser && !!authUser.roles[ROLES.ADMIN];
+
+export default compose(
+  withAuthorization(condition),
+  withFirebase
+)(AdminResource);
