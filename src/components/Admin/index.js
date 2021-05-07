@@ -2,10 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { compose } from "recompose";
 
+// * CONTEXTS
 import { withFirebase } from "../Firebase";
-// import { AuthUserContext } from "../Session";
 import { withAuthorization } from "../Session";
-// import AddResource from "./addResource";
+
+// * COMPONENTS
 import Header from "../Header";
 import { SignUpLink } from "../SignUp";
 import { FileUpload } from "../Upload";
@@ -14,9 +15,6 @@ import { NewResource } from "../AddResource";
 import * as ROUTES from "../../constants/routes";
 import * as ROLES from "../../constants/roles";
 /**
- *
- * @param {*} props
- * @returns
  *
  * TODO Build navigation in the sidebar
  * TODO Create a list of resources (all)
