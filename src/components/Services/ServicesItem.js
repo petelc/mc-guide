@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 
 import * as ROUTES from "../../constants/routes";
 
-import { withFirebase } from "../Firebase";
-
 class ServiceItem extends Component {
   constructor(props) {
     super(props);
@@ -35,6 +33,6 @@ class ServiceItem extends Component {
     );
   }
 }
-export default withFirebase(ServiceItem);
+export default ServiceItem;
 
 // /img/housing.png

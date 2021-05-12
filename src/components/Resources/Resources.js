@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
-import { withFirebase } from "../Firebase";
+// import { withFirebase } from "../Firebase";
+import { db } from "../../firebase";
 import ResourcesList from "./ResourcesList";
 import Header from "../Header";
 
@@ -11,45 +12,51 @@ class ResourcesPage extends Component {
     this.state = {
       loading: false,
       open: false,
-      resources: [],
+      resources: {},
     };
   }
 
   componentDidMount() {
-    this.setState({ loading: true });
-    // const name = this.props.name;
     const name = this.props.location.search.substring(3).toString();
-
     if (name) {
-      this.props.firebase
-        .resources()
-        .orderByChild("name")
-        .equalTo(name)
-        .on("value", (snapshot) => {
-          const data = snapshot.val();
-
-          if (data) {
-            const dataList = Object.keys(data).map((key) => ({
-              ...data[key],
-              rid: key,
-            }));
-
-            this.setState({ resources: dataList, loading: false });
-          } else {
-            this.setState({ resources: null, loading: false });
-          }
-        });
+      db.onceGetResources(name).then((snapshot) =>
+        this.setState(() => ({ resources: snapshot.val() }))
+      );
     } else {
-      this.setState({ resources: null, loading: false });
+      this.setState({ resources: null });
     }
+
+    // this.setState({ loading: true });
+    // // const name = this.props.name;
+    // const name = this.props.location.search.substring(3).toString();
+    // if (name) {
+    //   this.props.firebase
+    //     .resources()
+    //     .orderByChild("name")
+    //     .equalTo(name)
+    //     .on("value", (snapshot) => {
+    //       const data = snapshot.val();
+    //       if (data) {
+    //         const dataList = Object.keys(data).map((key) => ({
+    //           ...data[key],
+    //           rid: key,
+    //         }));
+    //         this.setState({ resources: dataList, loading: false });
+    //       } else {
+    //         this.setState({ resources: null, loading: false });
+    //       }
+    //     });
+    // } else {
+    //   this.setState({ resources: null, loading: false });
+    // }
   }
 
-  componentWillUnmount() {
-    this.props.firebase.resources().off();
-  }
+  // componentWillUnmount() {
+  //   this.props.firebase.resources().off();
+  // }
 
   render() {
-    const { loading, resources } = this.state;
+    const { resources } = this.state;
     return (
       <>
         <Header />
@@ -66,7 +73,7 @@ class ResourcesPage extends Component {
             </div>
             <div className="block__content">
               <div className="resources">
-                {loading && <div>Loading...</div>}
+                {/* {loading && <div>Loading...</div>} */}
                 {resources ? (
                   <ResourcesList resources={resources} />
                 ) : (
@@ -81,4 +88,4 @@ class ResourcesPage extends Component {
   }
 }
 
-export default withFirebase(ResourcesPage);
+export default ResourcesPage;

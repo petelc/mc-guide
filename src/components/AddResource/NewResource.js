@@ -4,7 +4,8 @@ import "react-circular-progressbar/dist/styles.css";
 import SunEditor from "suneditor-react";
 import "suneditor/dist/css/suneditor.min.css";
 
-import { withFirebase } from "../Firebase";
+// import { withFirebase } from "../Firebase";
+import { db } from "../../firebase";
 
 const NewResource = (props) => {
   const [file, setFile] = useState(null);
@@ -298,4 +299,4 @@ const NewResource = (props) => {
   );
 };
 
-export default withFirebase(NewResource);
+export default NewResource;

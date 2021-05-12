@@ -1,58 +1,65 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useList } from "react-firebase-hooks/database";
 
-import { withFirebase } from "../Firebase";
-import ServicesList from "./ServicesList";
+import * as ROUTES from "../../constants/routes";
+// import { ServicesDataProcessor } from "../Processor";
+import { firebase, db } from "../../firebase";
 
-class Services extends Component {
-  constructor(props) {
-    super(props);
+const Services = () => {
+  const [currentService, setCurrentService] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(-1);
+  //   ? use react-firebase-hooks
+  const [services, loading, error] = useList(db.getAllServices());
 
-    this.state = {
-      loading: false,
-      open: false,
-      services: [],
-    };
-  }
+  const refreshList = () => {
+    setCurrentService(null);
+    setCurrentIndex(-1);
+  };
 
-  componentDidMount() {
-    this.setState({ loading: true });
+  //   * set active service will handle the opening of the resource I think
+  const setActiveService = (service, index) => {
+    const { name, shortDescription, img_path } = service.val();
 
-    this.props.firebase.services().on("value", (snapshot) => {
-      const servicesObject = snapshot.val();
-
-      if (servicesObject) {
-        const servicesList = Object.keys(servicesObject).map((key) => ({
-          ...servicesObject[key],
-          sid: key,
-        }));
-
-        this.setState({ services: servicesList, loading: false });
-      } else {
-        this.setState({ services: null, loading: false });
-      }
+    setCurrentService({
+      key: service.key,
+      name: service.name,
+      shortDescription: service.shortDescription,
+      img_path: service.img_path,
     });
-  }
 
-  componentWillUnmount() {
-    this.props.firebase.services().off();
-  }
+    setCurrentIndex(index);
+  };
 
-  render() {
-    const { services, loading } = this.state;
+  return (
+    <>
+      <div className="house__cards">
+        {error && <strong>Error: {error}</strong>}
+        {loading && <span>Loading...</span>}
+        {!loading &&
+          services &&
+          services.map((service, index) => (
+            <div className="house__card" key={index}>
+              <img
+                src={service.val().img_path}
+                alt={service.val().name}
+                className="house__card__img"
+              />
+              <h5 className="house__card__title">{service.val().name}</h5>
+              <div className="house__card__text">
+                {service.val().shortDescription}
+              </div>
+              <Link
+                to={`${ROUTES.RESOURCES}/?q=${service.val().name}`}
+                className="btn--submit house__card__btn"
+              >
+                Learn More
+              </Link>
+            </div>
+          ))}
+      </div>
+    </>
+  );
+};
 
-    return (
-      <>
-        <div className="house__cards">
-          {loading && <div>Loading....</div>}
-          {services ? (
-            <ServicesList services={services} />
-          ) : (
-            <div>There are no available services .....</div>
-          )}
-        </div>
-      </>
-    );
-  }
-}
-
-export default withFirebase(Services);
+export default Services;

@@ -1,14 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 import SignOutButton from "../SignOut";
 import * as ROUTES from "../../constants/routes";
-import * as ROLES from "../../constants/roles";
-import { AuthUserContext } from "../Session";
+// import * as ROLES from "../../constants/roles";
+// import { AuthUserContext } from "../Session";
+import { firebase } from "../../firebase";
 
-const Navigation = ({ authUser }) => (
-  <div className="navigation">
-    <AuthUserContext.Consumer>
+const Navigation = ({ authUser }) => {
+  const [user, loading, error] = useAuthState(firebase.auth);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Danger Will Robinson something went wrong</p>;
+  }
+
+  return (
+    <div className="navigation">
+      {user ? <NavigationAuth authUser={authUser} /> : <NavigationNonAuth />}
+      {/* <AuthUserContext.Consumer>
       {(authUser) =>
         authUser ? (
           <NavigationAuth authUser={authUser} />
@@ -16,11 +30,12 @@ const Navigation = ({ authUser }) => (
           <NavigationNonAuth />
         )
       }
-    </AuthUserContext.Consumer>
-  </div>
-);
+    </AuthUserContext.Consumer> */}
+    </div>
+  );
+};
 
-const NavigationAuth = ({ authUser }) => (
+const NavigationAuth = ({ user }) => (
   <>
     <div className="navigation__item">
       <Link to={ROUTES.LANDING} className="navigation__link">
@@ -37,13 +52,13 @@ const NavigationAuth = ({ authUser }) => (
         Account
       </Link>
     </div>
-    {!!authUser.roles[ROLES.ADMIN] && (
-      <div className="navigation__item">
-        <Link to={ROUTES.ADMIN} className="navigation__link">
-          Admin
-        </Link>
-      </div>
-    )}
+    {/* {!!authUser.roles[ROLES.ADMIN] && ( */}
+    <div className="navigation__item">
+      <Link to={ROUTES.ADMIN} className="navigation__link">
+        Admin
+      </Link>
+    </div>
+    {/* )} */}
 
     <div className="navigation__item">
       <SignOutButton />

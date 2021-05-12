@@ -1,4 +1,4 @@
-import { storage } from "./firebase";
+// import { storage } from "./firebase";
 
 // TODO handle image and file upload here?
 

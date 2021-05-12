@@ -14,7 +14,7 @@ import ContactPage from "../Contact";
 import { AdminResource } from "../AdminResource";
 
 import * as ROUTES from "../../constants/routes";
-import { withAuthentication } from "../Session";
+// import { WithAuthentication } from "../Session";
 
 import "../../sass/main.scss";
 
@@ -36,4 +36,5 @@ const App = () => (
   </Router>
 );
 
-export default withAuthentication(App);
+export default App;
+// export default WithAuthentication(App);

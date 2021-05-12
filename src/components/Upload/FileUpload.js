@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-import { withFirebase } from "../Firebase";
+// import { withFirebase } from "../Firebase";
+import { db } from "../../firebase";
+import { useStorage } from "../Hooks/useStorage";
 
 /**
  * ? This handles the file upload control and sets the file and progress state
+ *
+ * ? I am pulling in a custom hook to handle the actual file upload. the file upload uses the new firebase config. Check for conflicts.
  */
 
 const FileUpload = (props) => {
@@ -14,8 +18,8 @@ const FileUpload = (props) => {
   const [name, setName] = useState(null);
   const [shortDescription, setShortDescription] = useState(null);
   const [description, setDescription] = useState(null);
-  const [progress, setProgress] = useState(0);
-  const [img_path, setImgPath] = useState(null);
+  // const [progress, setProgress] = useState(0);
+  // const [img_path, setImgPath] = useState(null);
 
   //   TODO find out what file type a pdf and word document would be
   const types = ["image/png", "image/jpeg", "image/jpg"];
@@ -23,33 +27,18 @@ const FileUpload = (props) => {
   const handleChange = (e) => {
     let selected = e.target.files[0];
 
-    if (selected && types.includes(selected.type)) {
-      setFile(selected);
-      // ? References
-      const myStorage = props.firebase.storage;
-
-      const storageRef = myStorage.ref();
-      const fileRef = storageRef.child("images/" + selected.name);
-
-      fileRef.put(selected).then(
-        (snap) => {
-          let percentage = (snap.bytesTransferred / snap.totalBytes) * 100;
-          setProgress(percentage);
-
-          snap.ref.getDownloadURL().then(function (url) {
-            setImgPath(url);
-          });
-        },
-        (err) => {
-          setError(err);
-          console.log(err);
-        }
-      );
-    } else {
-      setFile(null);
-      setError("Please select an image file");
+    if (selected) {
+      if (types.includes(selected.type)) {
+        setError(null);
+        setFile(selected);
+      } else {
+        setFile(null);
+        setError("Please select an image file");
+      }
     }
   };
+
+  const { progress, img_path } = useStorage(file);
 
   const onChangeContent = (e) => {
     // ? Test the name of the event and set the corresponding state
@@ -72,14 +61,14 @@ const FileUpload = (props) => {
   };
 
   const onCreateService = (event) => {
-    props.firebase.services().push({
+    db.doCreateService({
       img_path: img_path,
       name: name,
       shortDescription: shortDescription,
       description: description,
     });
     console.log("success pushing to firebase");
-    setImgPath("");
+    // setImgPath("");
     setName("");
     setShortDescription("");
     setDescription("");
@@ -167,4 +156,4 @@ const FileUpload = (props) => {
   );
 };
 
-export default withFirebase(FileUpload);
+export default FileUpload;
