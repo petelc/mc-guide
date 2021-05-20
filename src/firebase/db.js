@@ -43,7 +43,7 @@ export const doCreateResource = (
   application,
   appLabel
 ) =>
-  db.ref(`resources`).set({
+  resourcesDb.push({
     name,
     resourceName,
     url,
@@ -57,46 +57,49 @@ export const doCreateResource = (
   });
 
 // * gets resource by service name
-export const onceGetResources = (name) =>
-  db.ref(`resources/${name}`).once("value");
+// export const onceGetResources = (name) =>
+//   db.ref(`resources/${name}`).once("value");
 
 // * gets resource by key value
-export const onceGetResourceByKey = (key) =>
-  db.ref(`resources/${key}`).once("value");
+// export const onceGetResourceByKey = (key) =>
+//   db.ref(`resources/${key}`).once("value");
 
 // * gets all resources
-export const onceGetAllResources = () => db.ref("resources").once("values");
+const getAllResources = () => {
+  return resourcesDb;
+};
+// export const onceGetAllResources = () => db.ref("resources").once("values");
 
 //  * updates a resource
-export const updateResource = (
-  key,
-  name,
-  resourceName,
-  url,
-  phone,
-  shortDescription,
-  description,
-  availableDownload,
-  avLabel,
-  application,
-  appLabel
-) =>
-  db
-    .ref(`resources/${key}`)
-    .update(
-      name,
-      resourceName,
-      url,
-      phone,
-      shortDescription,
-      description,
-      availableDownload,
-      avLabel,
-      application,
-      appLabel
-    );
+// export const updateResource = (
+//   key,
+//   name,
+//   resourceName,
+//   url,
+//   phone,
+//   shortDescription,
+//   description,
+//   availableDownload,
+//   avLabel,
+//   application,
+//   appLabel
+// ) =>
+//   db
+//     .ref(`resources/${key}`)
+//     .update(
+//       name,
+//       resourceName,
+//       url,
+//       phone,
+//       shortDescription,
+//       description,
+//       availableDownload,
+//       avLabel,
+//       application,
+//       appLabel
+//     );
 
 // * removes a single resource
-export const onRemoveResource = (key) => db.ref(`resources/${key}`).remove();
+// export const onRemoveResource = (key) => db.ref(`resources/${key}`).remove();
 
-export { doCreateUser, doCreateService, getAllServices };
+export { doCreateUser, doCreateService, getAllServices, getAllResources };

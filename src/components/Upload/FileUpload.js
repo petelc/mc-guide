@@ -3,7 +3,8 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 // import { withFirebase } from "../Firebase";
-import { db } from "../../firebase";
+import { firebase } from "../../firebase";
+import { ServicesDataProcessor } from "../Processor";
 import { useStorage } from "../Hooks/useStorage";
 
 /**
@@ -61,7 +62,7 @@ const FileUpload = (props) => {
   };
 
   const onCreateService = (event) => {
-    db.doCreateService({
+    ServicesDataProcessor.doCreateService({
       img_path: img_path,
       name: name,
       shortDescription: shortDescription,

@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import { useList } from "react-firebase-hooks/database";
 
 import * as ROUTES from "../../constants/routes";
-// import { ServicesDataProcessor } from "../Processor";
-import { firebase, db } from "../../firebase";
+import { ServicesDataProcessor } from "../Processor";
+// import Resources from "../Resources";
 
 const Services = () => {
   const [currentService, setCurrentService] = useState("");
   const [currentIndex, setCurrentIndex] = useState(-1);
   //   ? use react-firebase-hooks
-  const [services, loading, error] = useList(db.getAllServices());
+  const [services, loading, error] = useList(ServicesDataProcessor.getAll());
 
   const refreshList = () => {
     setCurrentService(null);
@@ -19,13 +19,11 @@ const Services = () => {
 
   //   * set active service will handle the opening of the resource I think
   const setActiveService = (service, index) => {
-    const { name, shortDescription, img_path } = service.val();
+    const { name } = service.val();
 
     setCurrentService({
       key: service.key,
-      name: service.name,
-      shortDescription: service.shortDescription,
-      img_path: service.img_path,
+      name,
     });
 
     setCurrentIndex(index);
@@ -49,6 +47,7 @@ const Services = () => {
               <div className="house__card__text">
                 {service.val().shortDescription}
               </div>
+
               <Link
                 to={`${ROUTES.RESOURCES}/?q=${service.val().name}`}
                 className="btn--submit house__card__btn"

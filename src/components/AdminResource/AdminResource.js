@@ -8,7 +8,7 @@ import "suneditor/dist/css/suneditor.min.css";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 // import { withFirebase } from "../Firebase";
-import { firebase, db } from "../../firebase";
+import { firebase } from "../../firebase";
 // import { WithAuthorization } from "../Session";
 import * as ROLES from "../../constants/roles";
 import Header from "../Header";
@@ -76,7 +76,7 @@ const AdminResource = (props) => {
   // }, []);
 
   const onRemoveResource = (key) => {
-    db.onRemoveResource(key);
+    firebase.db.onRemoveResource(key);
     // let resourcesRef = firebase.resources();
     // let resourceRef = resourcesRef.child(key);
 
@@ -100,9 +100,9 @@ const AdminResource = (props) => {
       appLabel: appLabel,
     };
 
-    db.updateResource({ ...data }).then(() =>
-      setMessage("Resource updated successfully")
-    );
+    firebase.db
+      .updateResource({ ...data })
+      .then(() => setMessage("Resource updated successfully"));
 
     // let resourcesRef = props.firebase.resources();
     // let resourceRef = resourcesRef.child(data.key);
@@ -125,7 +125,7 @@ const AdminResource = (props) => {
   const OnOpenEditResource = (key) => {
     setOpen(true);
     setMessage("");
-    db.onceGetResourcesByKey(key).then((snapshot) => {
+    firebase.db.onceGetResourcesByKey(key).then((snapshot) => {
       // let data = snapshot.val();
       setCurrentResource(snapshot.val());
     });
